@@ -19,6 +19,8 @@ router.get('/answer', function(req, res) {
         not: req.session.viewed
       }
     }
+  }).then(function(survey) {
+
   });
 });
 
