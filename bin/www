@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+var debug = require('debug')('appsumo-survey');
+var path = require('path'); // Normalize all paths using the 'path' module.
+var config = require(path.join(__dirname, '../config.js')); // Load config file.
+var app = require(path.join(__dirname, '../app.js')); // Load the Express application.
+var models = require(path.join(__dirname, '../models/index.js')); // Load MySQL Models & Sequelize.
+
+app.set('port', process.env.PORT || config.app.port || 7866); //  That's "sumo" on a dialpad. Supports graceful degradation from environment variable PORT, to configuration value "app.port", to defaulting to 7866
+
+models.sequelize.sync().then(function() { //Synchronize database
+  var server = app.listen(app.get('port'), function() { //Start server.
+    debug('Express server listening on port ' + server.address().port);
+  });
+});
