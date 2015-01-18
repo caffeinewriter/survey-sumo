@@ -5,7 +5,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var flash = require('connect-flash');
+var flash = require('express-flash');
+var lusca = require('lusca'); // security time!
+
+var config = require(path.join(__dirname, 'config.js'))
 
 var routes = require(path.join(__dirname, 'routes/index.js')); // Load routes.
 var admin = require(path.join(__dirname, 'routes/admin.js')); // Load Administration routes.
@@ -21,6 +24,8 @@ app.use(logger('dev')); // App setup from here on out.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser(config.app.cookie.secret));
+
+// locals
 
 // Use MongoDB for session storage if it's inputted and enabled. Otherwise,
 // default to MemoryStore.
@@ -64,6 +69,14 @@ if (config.mongo.enabled) {
   }));
 }
 
+app.use(lusca({
+  csrf: true,
+  xframe: 'SAMEORIGIN',
+  xssProtection: true
+}));
+
+app.use(flash());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
@@ -77,6 +90,14 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
+
+// csrf error handling
+
+app.use(function(err, req, res, next) {
+  if (err.code !== "EBADCSRFTOKEN") return next(err);
+  res.status(403);
+  res.send('Expired session or form has been tampered with.');
+});
 
 // development error handler
 // will print stacktrace

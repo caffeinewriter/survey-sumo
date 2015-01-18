@@ -1,5 +1,15 @@
 var crypto = require('crypto');
 
+/*
+answers schema
+{
+  0: {
+    text: "Answer text",
+    votes: 0 // increment this
+  }
+}
+ */
+
 module.exports = function(sequelize, DataTypes) {
   var Survey = sequelize.define("Survey", {
     id: {
@@ -9,6 +19,10 @@ module.exports = function(sequelize, DataTypes) {
     question: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    type: {
+      type: DataTypes.ENUM,
+      values: ['multiple', 'single']
     },
     answers: {
       type: DataTypes.STRING,

@@ -82,6 +82,16 @@ router.get('/new/survey', isAuthenticated, function(req, res) {
 
 });
 
+router.post('/new/survey', isAuthenticated, function(req, res) {
+
+});
+
 router.get('/new/user', isAuthenticated, function(req, res) {
 
 });
+
+router.post('/new/user', isAuthenticated, function(req, res) {
+
+});
+
+module.exports = router;

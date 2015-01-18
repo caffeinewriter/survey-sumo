@@ -20,19 +20,21 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true
     }
-  }, {
+  },
+  {
     instanceMethods: {
       checkPassword: function(password, done) {
-        if (this.failures >= 5 && new Date(Date.now() + (1 * 60 * 60 * 1000)) < )
-        bcrypt.compare(password, this.password, function(err, isMatch) {
-          this.lastLogin = Date.now();
-          if (!isMatch) {
-            this.failures += 1;
-          } else {
-            this.failures = 0;
-          }
-          return done(null, isMatch);
-        });
+        if (this.failures >= 5 && new Date(Date.now() + (1 * 60 * 60 * 1000)) < this.lastLogin) {
+          bcrypt.compare(password, this.password, function(err, isMatch) {
+            this.lastLogin = Date.now();
+            if (!isMatch) {
+              this.failures += 1;
+            } else {
+              this.failures = 0;
+            }
+            return done(null, isMatch);
+          });
+        }
       }
     },
     hooks: {

@@ -1,8 +1,79 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Open Sans", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+fieldset {
+  border: none;
+}
+
+fieldset input[type='checkbox'],
+fieldset input[type='radio'] {
+  display: none;
+}
+
+fieldset input[type='checkbox'] + label,
+fieldset input[type='radio'] + label {
+  border: 2px #DDD solid;
+  border-top: 1px #DDD solid;
+  border-bottom: 1px #DDD solid;
+  padding: 15px 20px;
+  margin: 0 auto;
+  background-color: #F7F7F7;
+  width: 100%;
+  display: inline-block;
+  transition: .75s ease;
+}
+
+fieldset:first-child > input[type='checkbox'] + label,
+fieldset:first-child > input[type='radio'] + label {
+  border-radius: 5px 5px 0 0;
+  border-top-width: 2px;
+}
+
+fieldset:last-child > input[type='checkbox'] + label,
+fieldset:last-child > input[type='radio'] + label {
+  border-radius: 0 0 5px 5px;
+  border-bottom-width: 2px;
+}
+
+fieldset input[type='checkbox']:hover + label,
+fieldset input[type='radio']:hover + label {
+  background-color: #DDD;
+}
+
+fieldset input[type='checkbox']:checked + label,
+fieldset input[type='radio']:checked + label {
+  background-color: #2CBA59;
+  color: #FEFEFE;
+  border-color: #26A14D;
+}
+
+fieldset input[type='checkbox'] + label > i::before,
+fieldset input[type='radio'] + label > i::before {
+  content: "\f401";
+  font-size: 1.2em;
+}
+
+fieldset input[type='checkbox']:checked + label > i::before {
+  content: "\f3ff";
+}
+
+fieldset input[type='radio']:checked + label > i::before {
+  content: "\f400";
+}
+
+label span {
+  display: inline-block;
+  padding-left: 6px;
+  text-align: center;
+  font-size: 1.2em;
 }
