@@ -50,8 +50,8 @@ var isAuthenticated = function(req, res, next) {
 }
 
 router.get('/setup', function(req, res) {
-  models.User.findAll({}).then(function(users) {
-    if (!users) {
+  models.User.findAndCount({}).then(function(users) {
+    if (users.count < 1) {
       res.render('setup', {
         title:'Survey Sumo Setup'
       });

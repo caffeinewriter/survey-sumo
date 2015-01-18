@@ -1,8 +1,9 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  img.sumohead(src='/images/sumohead.png')
+  h1.center-text= title
+  p.center-text Welcome to #{title}. Want to give your opinion? Click below to get started!
   
   form(action='/answer')
     input(type='submit', value='Answer Some Questions!')

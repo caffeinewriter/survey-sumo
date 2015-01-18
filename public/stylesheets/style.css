@@ -15,6 +15,16 @@ fieldset {
   border: none;
 }
 
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+input {
+  width: 100%;
+}
+
 fieldset input[type='checkbox'],
 fieldset input[type='radio'] {
   display: none;
@@ -28,19 +38,18 @@ fieldset input[type='radio'] + label {
   padding: 15px 20px;
   margin: 0 auto;
   background-color: #F7F7F7;
-  width: 100%;
   display: inline-block;
   transition: .75s ease;
 }
 
-fieldset:first-child > input[type='checkbox'] + label,
-fieldset:first-child > input[type='radio'] + label {
+fieldset > input[type='checkbox']:first-child + label,
+fieldset > input[type='radio']:first-child + label {
   border-radius: 5px 5px 0 0;
   border-top-width: 2px;
 }
 
-fieldset:last-child > input[type='checkbox'] + label,
-fieldset:last-child > input[type='radio'] + label {
+fieldset > input[type='checkbox']:last-child + label,
+fieldset > input[type='radio']:last-child + label {
   border-radius: 0 0 5px 5px;
   border-bottom-width: 2px;
 }
@@ -71,9 +80,60 @@ fieldset input[type='radio']:checked + label > i::before {
   content: "\f400";
 }
 
+fieldset input[type='text'],
+fieldset input[type='password'],
+ {
+  padding: 10px;
+  border: 2px #DDD solid;
+  border-top: 1px #DDD solid;
+  border-bottom: 1px #DDD solid;
+  background-color: #F7F7F7;
+  display: inline-block;
+}
+
+fieldset input:first-child {
+  border-radius: 5px 5px 0 0;
+  border-top-width: 2px;
+}
+
+fieldset input:last-child {
+  border-radius: 0 0 5px 5px;
+  border-bottom-radius: 2px;
+}
+
+input {
+  background-color: #F7F7F7;
+  border: 2px #DDD solid;
+  border-radius: 5px;
+  padding: 10px;
+}
+
 label span {
   display: inline-block;
   padding-left: 6px;
   text-align: center;
   font-size: 1.2em;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.sumohead {
+  margin: auto;
+  display: block;
+  width: 200px;
+  height: 200px;
+}
+
+.tinytext {
+  color: #777;
+  font-size: .5em;
+  float: right;
+}
+
+.vertical-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }

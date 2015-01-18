@@ -13,19 +13,18 @@ router.get('/answer', function(req, res) {
     req.session.viewed = [];
     req.session.save();
   }
-  console.log(req.session.viewed.length);
   if (req.session.viewed.length < 1) {
-    console.log("Boop")
     models.Survey.find({}).then(function(surveys) {
-      var survey = surveys ? surveys[Math.floor(Math.random()*surveys.length)] : null;
+      var survey = surveys ? surveys[Math.floor(Math.random()*surveys.length)] : {id: null};
       req.session.currentSurvey = survey.id ? survey.id : null;
       req.session.save();
-      if (!survey) {
+      if (survey.id === null) {
         return res.render('done', {
-
+          title: 'All Done | Survey Sumo'
         });
       }
       res.render('answer', {
+        title: 'Survey Question | Survey Sumo',
         survey: survey
       });
     });
@@ -42,10 +41,11 @@ router.get('/answer', function(req, res) {
       req.session.save();
       if (!survey) {
         return res.render('done', {
-
+          title: 'All Done | Survey Sumo'
         });
       }
       res.render('answer', {
+        title: 'Survey Question | Survey Sumo',
         survey: survey
       });
     });
