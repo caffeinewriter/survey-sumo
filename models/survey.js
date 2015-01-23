@@ -12,10 +12,6 @@ answers schema
 
 module.exports = function(sequelize, DataTypes) {
   var Survey = sequelize.define("Survey", {
-    id: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     question: {
       type: DataTypes.STRING,
       allowNull: false
@@ -27,10 +23,6 @@ module.exports = function(sequelize, DataTypes) {
     answers: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    votes: {
-      type: DataTypes.STRING,
-      allowNull: true
     }
   }, {
     hooks: {

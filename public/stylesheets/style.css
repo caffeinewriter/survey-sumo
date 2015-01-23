@@ -3,16 +3,22 @@
 }
 
 body {
-  padding: 50px;
   font: 14px "Open Sans", Helvetica, Arial, sans-serif;
+  padding: 10px;
 }
 
 a {
   color: #00B7FF;
 }
 
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
 fieldset {
   border: none;
+  padding-top: 0;
 }
 
 .container {
@@ -21,12 +27,34 @@ fieldset {
   margin: 0 auto;
 }
 
-input {
+input, button {
   background-color: #F7F7F7;
   border: 2px #DDD solid;
   border-radius: 5px;
   padding: 10px;
   width: 100%;
+  transition: .5s ease;
+}
+
+input:hover, button:hover {
+  background-color: #DDD;
+}
+
+input[type='submit'] {
+  background-color: #2665C9;
+  color: #FEFEFE;
+  vertical-align: middle;
+}
+
+input[type='submit']:hover {
+  background-color: #235CB8;
+}
+
+fieldset input,
+fieldset button {
+  border-radius: 0;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
 }
 
 fieldset input[type='checkbox'],
@@ -43,7 +71,7 @@ fieldset input[type='radio'] + label {
   margin: 0 auto;
   background-color: #F7F7F7;
   display: inline-block;
-  transition: .75s ease;
+  transition: .5s ease;
 }
 
 fieldset input[type='checkbox']:hover + label,
@@ -62,6 +90,7 @@ fieldset input[type='checkbox'] + label > i::before,
 fieldset input[type='radio'] + label > i::before {
   content: "\f401";
   font-size: 1.2em;
+  padding-right: .25em;
 }
 
 fieldset input[type='checkbox']:checked + label > i::before {
@@ -74,7 +103,7 @@ fieldset input[type='radio']:checked + label > i::before {
 
 fieldset input[type='text'],
 fieldset input[type='password'],
- {
+fieldset button {
   padding: 10px;
   border: 2px #DDD solid;
   border-top: 1px #DDD solid;
@@ -83,18 +112,16 @@ fieldset input[type='password'],
   display: inline-block;
 }
 
-fieldset input:first-child {
-  border-radius: 5px 5px 0 0;
+fieldset input:first-child,
+fieldset button:first-child {
+  border-radius: 5px 5px inherit inherit;
   border-top-width: 2px;
 }
 
-fieldset input:last-child {
-  border-radius: 0 0 5px 5px;
+fieldset input:last-child,
+fieldset button:last-child {
+  border-radius: inherit inherit 5px 5px;
   border-bottom-radius: 2px;
-}
-
-input:hover {
-  background-color: #DDD;
 }
 
 label span {
@@ -129,4 +156,143 @@ label span {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.flash-wrapper {
+  width: 100%;
+  height: 2em;
+  top: -2em;
+  left: 0;
+  z-index: 20;
+  -webkit-animation: slideup 5s;
+  -o-animation: slideup 5s;
+  animation: slideup 5s;
+  color: #FEFEFE;
+}
+
+.flash-wrapper .info {
+  background-color: #2665C9;
+}
+
+.flash-wrapper .error {
+  background-color: #C9262C;
+}
+
+.halfpint > label {
+  width: 50%;
+  display: inline-block;
+  text-align: center;
+  font-size: 1.2em;
+  border-width: 2px;
+}
+
+.halfpint > label:first-child {
+  border-width-right: 1px !important;
+}
+
+.halfpint > label:last-child {
+  border-width-left: 1px !important;
+}
+
+.add > i {
+  padding-right: .25em;
+}
+
+.float-left {
+  float: left;
+}
+
+.answer {
+  width: 100%;
+  position: relative;
+  height: 100%;
+}
+
+.answer > .drag-handle {
+  width: 1.2em;
+  font-size: 1.5em;
+  line-height: 2em;
+  position: absolute;
+  top: 0;
+  left: -1.2em;
+  vertical-align: middle;
+}
+
+.answer > input {
+  width: 92%;
+}
+
+.answer > .delete-answer {
+  width: 8%;
+  border-left-width: 0;
+  border-radius: 0 5px 5px 0;
+  /*top: 1px;
+  font-size: 1.2em;
+  line-height: 1em;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  height: 43px;*/
+}
+
+.answer:first-child > input,
+.answer:first-child > .delete-answer {
+  border-top-width: 2px;
+}
+
+.answer:last-child > input,
+.answer:last-child > .delete-answer {
+  border-bottom-width: 2px;
+}
+
+.errorText {
+  color: #C9262C;
+  display: none;
+}
+
+@keyframes slideup{
+  0% {
+    top: 0;
+  }
+  90% {
+    top: 0;
+  }
+  100% {
+    top: -2em;
+  }
+}
+
+@-moz-keyframes slideup{
+  0% {
+    top: 0;
+  }
+  90% {
+    top: 0;
+  }
+  100% {
+    top: -2em;
+  }
+}
+
+@-webkit-keyframes slideup{
+  0% {
+    top: 0;
+  }
+  90% {
+    top: 0;
+  }
+  100% {
+    top: -2em;
+  }
+}
+
+@-o-keyframes slideup{
+  0% {
+    top: 0;
+  }
+  90% {
+    top: 0;
+  }
+  100% {
+    top: -2em;
+  }
 }

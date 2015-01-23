@@ -3,8 +3,11 @@ var router = express.Router();
 var path = require('path');
 var config = require(path.join(__dirname, '../config.js'));
 var models = require(path.join(__dirname, '../models/index.js'));
+var helpers = require(path.join(__dirname, '../helpers.js'))
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
+var bcrypt = require('bcrypt');
+
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -43,6 +46,20 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
+var genHash = function(password, cb) {
+  bcrypt.genSalt(config.app.salt.work, function(err, salt) {
+    if (!!err) {
+      return cb(err);
+    }
+    bcrypt.hash(password, salt, function(err, hash) {
+      if (!!err) {
+        return cb(err);
+      }
+      return cb(null, hash)
+    });
+  });
+};
+
 var isAuthenticated = function(req, res, next) {
   if(!req.isAuthenticated()) {
     req.flash('error', 'You need to log in to do that.');
@@ -69,7 +86,6 @@ router.get('/', function(req, res) {
 
 router.get('/setup', function(req, res) {
   models.User.findAndCount({}).then(function(users) {
-    console.log(users.count);
     if (users.count < 1) {
       res.render('setup', {
         title:'Setup | Survey Sumo',
@@ -90,15 +106,17 @@ router.post('/setup', function(req, res) {
   }
   models.User.findAndCount({}).then(function(users) {
     if (users.count < 1) {
-      models.User.create({
-        username: req.body.username,
-        password: req.body.password,
-        lastLogin: Date.now(),
-        failures: 0
-      })
-      .then(function() {
-        req.flash('info', 'User has been set up. Please log in.');
-        return res.redirect('/admin/login');
+      genHash(req.body.password, function (err, passHash) {
+        models.User.create({
+          username: req.body.username,
+          password: passHash,
+          lastLogin: Date.now(),
+          failures: 0
+        })
+        .then(function() {
+          req.flash('info', 'User has been set up. Please log in.');
+          return res.redirect('/admin/login');
+        });
       });
     }
     req.flash('error', 'There is already a user set up for this instance. Please log in instead.');
@@ -145,7 +163,15 @@ router.get('/new/survey', isAuthenticated, function(req, res) {
 });
 
 router.post('/new/survey', isAuthenticated, function(req, res) {
-  //TODO: Save survey
+  var answers = [];
+  for(k = 0; k < req.body.answers.length; k++) {
+    answers[req.body.answers[k]] = 0;
+  }
+  models.Survey.create({
+    question: req.body.question,
+    type: req.body.type,
+    answers: answers
+  })
 });
 
 router.get('/new/user', isAuthenticated, function(req, res) {

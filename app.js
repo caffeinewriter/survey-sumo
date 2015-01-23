@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
 var lusca = require('lusca'); // security time!
+var passport = require('passport');
 
 var config = require(path.join(__dirname, 'config.js'))
 
@@ -74,6 +75,8 @@ app.use(lusca({
 }));
 
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, 'public')));
 

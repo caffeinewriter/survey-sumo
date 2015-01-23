@@ -2,21 +2,42 @@ extends layout
 
 block content
   h1.center-text New Survey
-    form(action='/new/survey', method='POST')
-      h3 How many options should the user be able to select?
-      .halfpint
-        input(type='radio', name='type', value='single', checked)
-        label(for='single') Only One
-        input(type='radio', name='type', value='multiple')
-        label(for='multiple') Many
-      .answers
-        ul.sortable
-          li.answer
-            .ion-close-round.1
-            input(type='text', name='answers', placeholder='Answer')
-          li.answer 
-            .ion-close-round.2
-            input(type='text', name='answers', placeholder='Answer')
-      button.add
-        .ion-plus-round
+  form(action='/new/survey', method='POST', onsubmit='return validateForm()')
+    include ./partials/csrf.jade
+    h3 How many options should the user be able to select?
+    fieldset.halfpint
+      input#single(type='radio', name='type', value='single', checked)
+      label(for='single')
+        i.ionicons
+        | Only One
+      input#multiple(type='radio', name='type', value='multiple')
+      label(for='multiple') 
+        i.ionicons
+        | Many
+    h3 What is the question you want to ask users?
+    fieldset
+      p.errorText#noQuestion You need to enter a survey question.
+      input(type='text', name='question', placeholder='What is the survey question?')
+    h3 What options should the user be presented with?
+    fieldset.answers
+      p.errorText#tooLow A survey must have at least two options.
+      p.errorText#isEmpty Make sure all answers are filled in, and delete any you don't need.
+      ul.sortable
+        li.answer
+          i.ion-navicon-round.drag-handle
+          input(type='text', name='answers', tabindex='1', placeholder='Answer')
+          button(type='button').delete-answer
+            i.ion-close-round
+        li.answer
+          i.ion-navicon-round.drag-handle
+          input(type='text', name='answers', tabindex='2', placeholder='Answer')
+          button(type='button').delete-answer
+            i.ion-close-round
+    fieldset
+      button.add(type='button')
+        i.ion-plus-round
         | Add Answer
+    fieldset
+      input(type='submit', value='Create New Survey')
+  script(src='/javascripts/Sortable.min.js')
+  script(src='/javascripts/survey.js')

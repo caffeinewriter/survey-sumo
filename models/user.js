@@ -28,7 +28,7 @@ module.exports = function(sequelize, DataTypes) {
       checkPassword: function(password, done) {
         var oneHour = new Date(Date.now() + (1 * 60 * 60 * 1000));
         var lastLogin = this.lastLogin ? this.lastLogin : Date.now();
-        if (this.failures > 5 && oneHour < this.lastLogin) {
+        if (this.failures < 5 && oneHour > this.lastLogin) {
           bcrypt.compare(password, this.password, function(err, isMatch) {
             this.lastLogin = Date.now();
             if (!isMatch) {
@@ -38,6 +38,8 @@ module.exports = function(sequelize, DataTypes) {
             }
             return done(null, isMatch);
           });
+        } else {
+          return done(null, false);
         }
       }
     },
