@@ -5,7 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var flash = require('express-flash');
+var flash = require('connect-flash');
 var lusca = require('lusca'); // security time!
 
 var config = require(path.join(__dirname, 'config.js'))
@@ -24,8 +24,6 @@ app.use(logger('dev')); // App setup from here on out.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser(config.app.cookie.secret));
-
-// locals
 
 // Use MongoDB for session storage if it's inputted and enabled. Otherwise,
 // default to MemoryStore.

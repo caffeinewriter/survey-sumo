@@ -22,6 +22,10 @@ fieldset {
 }
 
 input {
+  background-color: #F7F7F7;
+  border: 2px #DDD solid;
+  border-radius: 5px;
+  padding: 10px;
   width: 100%;
 }
 
@@ -40,18 +44,6 @@ fieldset input[type='radio'] + label {
   background-color: #F7F7F7;
   display: inline-block;
   transition: .75s ease;
-}
-
-fieldset > input[type='checkbox']:first-child + label,
-fieldset > input[type='radio']:first-child + label {
-  border-radius: 5px 5px 0 0;
-  border-top-width: 2px;
-}
-
-fieldset > input[type='checkbox']:last-child + label,
-fieldset > input[type='radio']:last-child + label {
-  border-radius: 0 0 5px 5px;
-  border-bottom-width: 2px;
 }
 
 fieldset input[type='checkbox']:hover + label,
@@ -101,11 +93,8 @@ fieldset input:last-child {
   border-bottom-radius: 2px;
 }
 
-input {
-  background-color: #F7F7F7;
-  border: 2px #DDD solid;
-  border-radius: 5px;
-  padding: 10px;
+input:hover {
+  background-color: #DDD;
 }
 
 label span {
@@ -117,6 +106,10 @@ label span {
 
 .center-text {
   text-align: center;
+}
+
+.captcha {
+  margin: 0 auto;
 }
 
 .sumohead {

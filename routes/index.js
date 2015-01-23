@@ -20,12 +20,16 @@ router.get('/answer', function(req, res) {
       req.session.save();
       if (survey.id === null) {
         return res.render('done', {
-          title: 'All Done | Survey Sumo'
+          title: 'All Done | Survey Sumo',
+          info: req.flash('info'),
+          err: req.flash('err')
         });
       }
       res.render('answer', {
         title: 'Survey Question | Survey Sumo',
-        survey: survey
+        survey: survey,
+        info: req.flash('info'),
+        err: req.flash('err')
       });
     });
   } else {
@@ -41,12 +45,16 @@ router.get('/answer', function(req, res) {
       req.session.save();
       if (!survey) {
         return res.render('done', {
-          title: 'All Done | Survey Sumo'
+          title: 'All Done | Survey Sumo',
+          info: req.flash('info'),
+          err: req.flash('err')
         });
       }
       res.render('answer', {
         title: 'Survey Question | Survey Sumo',
-        survey: survey
+        survey: survey,
+        info: req.flash('info'),
+        err: req.flash('err')
       });
     });
   }
@@ -54,7 +62,7 @@ router.get('/answer', function(req, res) {
 
 router.post('/answer', function(req, res) {
   if (!req.session.currentSurvey) {
-    req.flash('err', 'Sorry, we had a problem processing your request.');
+    req.flash('error', 'Sorry, we had a problem processing your request.');
     return res.redirect('/answer');
   }
   models.Survey.findOne({

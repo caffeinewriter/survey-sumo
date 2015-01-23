@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1.center-text New Survey
+    form(action='/new/survey', method='POST')
+      h3 How many options should the user be able to select?
+      .halfpint
+        input(type='radio', name='type', value='single', checked)
+        label(for='single') Only One
+        input(type='radio', name='type', value='multiple')
+        label(for='multiple') Many
+      .answers
+        ul.sortable
+          li.answer
+            .ion-close-round.1
+            input(type='text', name='answers', placeholder='Answer')
+          li.answer 
+            .ion-close-round.2
+            input(type='text', name='answers', placeholder='Answer')
+      button.add
+        .ion-plus-round
+        | Add Answer

@@ -5,6 +5,8 @@ block content
   h3.center-text Welcome to Sumo Survey
   p.center-text This setup will only have to be performed once to set up the initial user. All other administration functions can be performed from the backend once logged in.
   form(action='/admin/setup', method='POST')
+    include ./partials/csrf.jade
     fieldset
       input(type='text', placeholder='Username', name='username')
       input(type='password', placeholder='Password', name='password')
+      input(type='submit', value='Finish Setup')

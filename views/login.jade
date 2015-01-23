@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  img.sumohead(src='/images/sumohead.png')
+  h3.center-text Login
+    form(action='/admin/login', method='POST')
+      include ./partials/csrf.jade
+      fieldset
+        input(type='text', placeholder='Username', name='username')
+        input(type='password', placeholder='Password', name='password')
+        .captcha!= captcha  
+        input(type='submit', value='Log In')

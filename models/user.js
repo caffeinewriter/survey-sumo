@@ -14,17 +14,21 @@ module.exports = function(sequelize, DataTypes) {
     },
     lastLogin: {
       type: DataTypes.DATE,
-      allowNull: true
+      allowNull: false,
+      defaultValue: Date.now()
     },
     failures: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: false,
+      defaultValue: 0
     }
   },
   {
     instanceMethods: {
       checkPassword: function(password, done) {
-        if (this.failures >= 5 && new Date(Date.now() + (1 * 60 * 60 * 1000)) < this.lastLogin) {
+        var oneHour = new Date(Date.now() + (1 * 60 * 60 * 1000));
+        var lastLogin = this.lastLogin ? this.lastLogin : Date.now();
+        if (this.failures > 5 && oneHour < this.lastLogin) {
           bcrypt.compare(password, this.password, function(err, isMatch) {
             this.lastLogin = Date.now();
             if (!isMatch) {
@@ -35,25 +39,6 @@ module.exports = function(sequelize, DataTypes) {
             return done(null, isMatch);
           });
         }
-      }
-    },
-    hooks: {
-      beforeValidate: function(user, options, cb) {
-        if(user.changed('password')) {
-          bcrypt.genSalt(SALT_WORK, function(err, salt) {
-            if (!!err) {
-              throw new Error('Error in generating salt.');
-            }
-            bcrypt.hash(user.password, salt, function(err, hash) {
-              if (!!err) {
-                throw new Error('Error in generating password hash.');
-              }
-              user.password = hash;
-              return cb(null, user);
-            });
-          });
-        }
-        return cb(null, user);
       }
     },
     classMethods: {

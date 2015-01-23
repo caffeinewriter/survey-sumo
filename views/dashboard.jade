@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 Adminstration Dashboard
+  form(action='/admin/new/survey', method='GET')
+    input(type='submit', value='New Survey')
+  form(action='/admin/edit/surveys', method='GET')
+    input(type='submit', value='Edit Surveys')
+  form(action='/admin/new/user', method='GET')
+    input(type='submit', value='New User')
+  form(action='/admin/edit/users', method='GET')
+    input(type='submit', value='Edit Users')
