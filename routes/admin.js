@@ -3,10 +3,10 @@ var router = express.Router();
 var path = require('path');
 var config = require(path.join(__dirname, '../config.js'));
 var models = require(path.join(__dirname, '../models/index.js'));
-var helpers = require(path.join(__dirname, '../helpers.js'))
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var bcrypt = require('bcrypt');
+var empty = require('is-empty');
 
 
 passport.use(new LocalStrategy(
@@ -62,7 +62,7 @@ var genHash = function(password, cb) {
 
 var isAuthenticated = function(req, res, next) {
   if(!req.isAuthenticated()) {
-    req.flash('error', 'You need to log in to do that.');
+    req.flash('err', 'You need to log in to do that.');
     return res.redirect('/admin/login');
   }
   next();
@@ -93,14 +93,14 @@ router.get('/setup', function(req, res) {
         err: req.flash('err')
       });
     } else {
-      req.flash('error', 'There is already a user set up for this instance. Please log in instead.')
+      req.flash('err', 'There is already a user set up for this instance. Please log in instead.')
       return res.redirect('/admin/login');
     }
   });
 });
 
 router.post('/setup', function(req, res) {
-  if (!req.body.username || !req.body.password) {
+  if (empty(req.body.username) || empty(req.body.password)) {
     req.flash('err', 'Username and Password are both required.')
     return res.redirect('/admin/setup')
   }
@@ -119,7 +119,7 @@ router.post('/setup', function(req, res) {
         });
       });
     }
-    req.flash('error', 'There is already a user set up for this instance. Please log in instead.');
+    req.flash('err', 'There is already a user set up for this instance. Please log in instead.');
     return res.redirect('/admin/login');
   });
 });
@@ -139,14 +139,14 @@ router.post('/login', passport.authenticate('local', {
   failureFlash: 'Invalid username or password.'
 }));
 
-router.get('/logout', function(req, res) {
+router.get('/logout', isAuthenticated, function(req, res) {
   req.logout();
   req.flash('info', 'You have been successfully logged out.');
   res.redirect('/admin/login');
 });
 
-router.get('/dashboard', function(req, res) {
-  //TODO: Spiffy up dashboard.
+router.get('/dashboard', isAuthenticated, function(req, res) {
+  //FIXME: Spiffy up dashboard.
   res.render('dashboard', {
     title: 'Administration Dashboard | Survey Sumo',
     info: req.flash('info'),
@@ -163,15 +163,34 @@ router.get('/new/survey', isAuthenticated, function(req, res) {
 });
 
 router.post('/new/survey', isAuthenticated, function(req, res) {
-  var answers = [];
-  for(k = 0; k < req.body.answers.length; k++) {
-    answers[req.body.answers[k]] = 0;
+  if (req.body.answers.length < 2 || empty(req.body.question)) {
+    req.flash('err', 'Your survey must have a question and at least two answers.');
   }
+  var answers = JSON.stringify(req.body.answers);
+  var results = {};
+  for(k = 0; k < req.body.answers.length; k++) {
+    results[k] = 0;
+  }
+  results = JSON.stringify(results);
+  console.log(req.body.question);
+  console.dir(req.body.answers);
+  console.log(answers);
+  console.log(req.body.type);
+  console.log(results);
   models.Survey.create({
     question: req.body.question,
     type: req.body.type,
-    answers: answers
+    answers: answers,
+    results: results
   })
+  .then(function(survey) {
+    survey
+    .setUser(req.user)
+    .then(function() {
+      req.flash('info', 'New survey has been created succesfully.');
+      return res.redirect('/admin/dashboard');
+    });
+  });
 });
 
 router.get('/new/user', isAuthenticated, function(req, res) {
@@ -183,7 +202,24 @@ router.get('/new/user', isAuthenticated, function(req, res) {
 });
 
 router.post('/new/user', isAuthenticated, function(req, res) {
-  //TODO: Save user.
+  if (empty(req.body.username) || empty(req.body.password)) {
+    req.flash('err', 'Both a username and a password are required for users.');
+    return res.redirect('/admin/new/user')
+  }
+  //FIXME: Require minimum password length
+  genHash(req.body.password, function (err, passHash) {
+    models.User.create({
+      username: req.body.username,
+      password: passHash,
+      lastLogin: Date.now(),
+      failures: 0
+    })
+    .then(function() {
+      //TODO: User priviledge levels.
+      req.flash('info', 'New user has been created.');
+      return res.redirect('/admin/dashboard');
+    });
+  });
 });
 
 module.exports = router;

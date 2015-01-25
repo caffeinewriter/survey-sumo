@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1.center-text New User
+  form(action='/admin/new/user', method='POST')
+    include ./partials/csrf.jade
+    fieldset
+      input(type='text', name='username', placeholder='Username')
+      input(type='password', name='password', placeholder='Password')
+      input(type='submit', value='Create New User')

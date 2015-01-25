@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1.center-text New Survey
-  form(action='/new/survey', method='POST', onsubmit='return validateForm()')
+  form(action='/admin/new/survey', method='POST', onsubmit='return validateForm()')
     include ./partials/csrf.jade
     h3 How many options should the user be able to select?
     fieldset.halfpint
@@ -13,7 +13,7 @@ block content
       input#multiple(type='radio', name='type', value='multiple')
       label(for='multiple') 
         i.ionicons
-        | Many
+        | Multiple
     h3 What is the question you want to ask users?
     fieldset
       p.errorText#noQuestion You need to enter a survey question.

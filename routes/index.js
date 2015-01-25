@@ -3,7 +3,7 @@ var router = express.Router();
 var path = require('path');
 var models = require(path.join(__dirname, '../models/index.js'));
 
-/* GET home page. */
+
 router.get('/', function(req, res) {
   res.render('index', { title: 'Survey Sumo' });
 });
@@ -16,6 +16,7 @@ router.get('/answer', function(req, res) {
   if (req.session.viewed.length < 1) {
     models.Survey.find({}).then(function(surveys) {
       var survey = surveys ? surveys[Math.floor(Math.random()*surveys.length)] : {id: null};
+      console.dir(surveys);
       req.session.currentSurvey = survey.id ? survey.id : null;
       req.session.save();
       if (survey.id === null) {

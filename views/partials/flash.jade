@@ -1,4 +1,5 @@
-- if (info) 
-  .message.info= info
-- if (err)
-  .messages.error= err
+.flash-wrapper
+  - if (info != '') 
+    .message.info.text-center= info
+  - if (err != '')
+    .messages.error.text-center= err

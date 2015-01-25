@@ -11,16 +11,18 @@ block content
         - var i = 1;
         - each answer in answers
           input(type='checkbox', name='answers', id='answer'+i)
-          label(for='answer'+1)
+          label(for='answer'+i)
             i.ionicons
             span= answer
+          - i++
     - else 
       .tinytext Select one.
       fieldset
         - var answers = JSON.parse(survey.answers)
         - var i = 1;
         - each answer in answers
-        input(type='radio', name='answers', id='answer'+i)
-          label(for='answer'+1)
+          input(type='radio', name='answers', id='answer'+i)
+          label(for='answer'+i)
             i.ionicons
-              span= answer
+            span= answer
+          - i++
