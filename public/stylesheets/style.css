@@ -19,6 +19,7 @@ ul {
 fieldset {
   border: none;
   padding-top: 0;
+  width: 100%;
 }
 
 .container {
@@ -72,6 +73,7 @@ fieldset input[type='radio'] + label {
   background-color: #F7F7F7;
   display: inline-block;
   transition: .5s ease;
+  width: 100%;
 }
 
 fieldset input[type='checkbox']:hover + label,
@@ -148,8 +150,9 @@ label span {
 
 .tinytext {
   color: #777;
-  font-size: .5em;
+  font-size: .85em;
   float: right;
+  display: block;
 }
 
 .vertical-center {

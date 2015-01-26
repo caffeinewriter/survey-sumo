@@ -5,7 +5,11 @@ var models = require(path.join(__dirname, '../models/index.js'));
 
 
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Survey Sumo' });
+  res.render('index', {
+    title: 'Survey Sumo',
+    info: req.flash('info'),
+    err: req.flash('err')
+  });
 });
 
 router.get('/answer', function(req, res) {
@@ -14,7 +18,7 @@ router.get('/answer', function(req, res) {
     req.session.save();
   }
   if (req.session.viewed.length < 1) {
-    models.Survey.find({}).then(function(surveys) {
+    models.Survey.findAll({}).then(function(surveys) {
       var survey = surveys ? surveys[Math.floor(Math.random()*surveys.length)] : {id: null};
       console.dir(surveys);
       req.session.currentSurvey = survey.id ? survey.id : null;

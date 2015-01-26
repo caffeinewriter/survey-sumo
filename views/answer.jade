@@ -1,12 +1,11 @@
 extends layout
 
 block content
-  h3.center-text= survey.question
+  h1.center-text= survey.question
   form(action='/answer', method='post')
     include ./partials/csrf.jade
     - if (survey.type === 'multiple')
-      .tinytext Select one or more.
-      fieldset
+      fieldset.answers
         - var answers = JSON.parse(survey.answers)
         - var i = 1;
         - each answer in answers
@@ -17,7 +16,7 @@ block content
           - i++
     - else 
       .tinytext Select one.
-      fieldset
+      fieldset.answers
         - var answers = JSON.parse(survey.answers)
         - var i = 1;
         - each answer in answers
