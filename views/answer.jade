@@ -2,26 +2,26 @@ extends layout
 
 block content
   h1.center-text= survey.question
-  form(action='/answer', method='post')
+  form(action='/answer', method='POST')
     include ./partials/csrf.jade
     - if (survey.type === 'multiple')
       fieldset.answers
         - var answers = JSON.parse(survey.answers)
         - var i = 1;
         - each answer in answers
-          input(type='checkbox', name='answers', id='answer'+i)
+          input(type='checkbox', name='answers', id='answer'+i, value=i-1)
           label(for='answer'+i)
             i.ionicons
             span= answer
           - i++
     - else 
-      .tinytext Select one.
       fieldset.answers
         - var answers = JSON.parse(survey.answers)
         - var i = 1;
         - each answer in answers
-          input(type='radio', name='answers', id='answer'+i)
+          input(type='radio', name='answers', id='answer'+i, value=i-1)
           label(for='answer'+i)
             i.ionicons
             span= answer
           - i++
+    input(type='submit', value='Submit Your Answer')

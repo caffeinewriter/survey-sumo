@@ -90,9 +90,18 @@ fieldset input[type='radio']:checked + label {
 
 fieldset input[type='checkbox'] + label > i::before,
 fieldset input[type='radio'] + label > i::before {
-  content: "\f401";
   font-size: 1.2em;
   padding-right: .25em;
+}
+
+fieldset input[type='radio'] + label > i::before {
+  font-size: 1.4em;
+  content: "\f401";
+}
+
+fieldset input[type='checkbox'] + label > i::before {
+  font-size: 1.4em;
+  content: "\f3fe";
 }
 
 fieldset input[type='checkbox']:checked + label > i::before {
