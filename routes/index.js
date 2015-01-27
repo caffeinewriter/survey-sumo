@@ -28,7 +28,8 @@ router.get('/answer', function(req, res) {
         return res.render('done', {
           title: 'All Done | Survey Sumo',
           info: req.flash('info'),
-          err:  req.flash('error')
+          err:  req.flash('error'),
+          loggedIn: req.user
         });
       }
       res.render('answer', {
