@@ -342,7 +342,7 @@ router.post('/delete/user', isAuthenticated, function(req, res) {
   }).then(function(user) {
     user.destroy();
     req.flash('info', 'User has been deleted successfully.');
-    return res.redirect('/list/user');
+    return res.redirect('/admin/list/user');
   });
 });
 
