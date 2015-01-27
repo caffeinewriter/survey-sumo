@@ -341,18 +341,21 @@ table.surveys tr:nth-of-type(odd) {
   width: 90%;
   height: 100%;
   margin: 0 auto;
+  overflow-x: scroll;
 }
 
 ul.nav {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   top: 0;
   list-style-type: none;
+  display: block;
+  overflow-y: hidden;
 }
 
 ul.nav li {
   height: 100%;
-  display: block;
+  display: inline-block;
   position: relative;
   float: left;
   text-align: center;
