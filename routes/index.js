@@ -9,7 +9,8 @@ router.get('/', function(req, res) {
   res.render('index', {
     title: 'Survey Sumo',
     info: req.flash('info'),
-    err: req.flash('err')
+    err:  req.flash('error'),
+    loggedIn: req.user
   });
 });
 
@@ -27,14 +28,15 @@ router.get('/answer', function(req, res) {
         return res.render('done', {
           title: 'All Done | Survey Sumo',
           info: req.flash('info'),
-          err: req.flash('err')
+          err:  req.flash('error')
         });
       }
       res.render('answer', {
         title: 'Survey Question | Survey Sumo',
         survey: survey,
         info: req.flash('info'),
-        err: req.flash('err')
+        err:  req.flash('error'),
+        loggedIn: req.user
       });
     });
   } else {
@@ -52,14 +54,15 @@ router.get('/answer', function(req, res) {
         return res.render('done', {
           title: 'All Done | Survey Sumo',
           info: req.flash('info'),
-          err: req.flash('err')
+          err:  req.flash('error')
         });
       }
       res.render('answer', {
         title: 'Survey Question | Survey Sumo',
         survey: survey,
         info: req.flash('info'),
-        err: req.flash('err')
+        err:  req.flash('error'),
+        loggedIn: req.user
       });
     });
   }

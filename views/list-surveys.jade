@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1 Survey Questions
+  table.surveys.responsive
+    thead
+      th ID
+      th Question
+      th Results
+      th Delete
+    - each survey in surveys
+      tr
+        td= survey.id
+        td= survey.question
+        td 
+          a.button(href='/admin/results/'+survey.id) Results
+        td
+          form(action='/admin/delete/survey', method='POST', onsubmit='return confirm(\'Are you sure you wish to delete this survey? All results and answers will be deleted.\')')
+            include ./partials/csrf.jade
+            input(type='hidden', value=survey.id, name='surveyId')
+            input.list-input(type='submit', value='Delete')

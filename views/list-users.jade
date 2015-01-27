@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1 Survey Questions
+  table.surveys.responsive
+    thead
+      th ID
+      th Username
+      th Edit
+      th Delete
+    - each user in users
+      tr
+        td= user.id
+        td= user.username
+        td 
+          a.button(href='/admin/edit/user/'+user.id) Edit
+        td
+          form(action='/admin/delete/user', method='POST', onsubmit='return confirm(\'Are you sure you wish to delete this user?\')')
+            include ./partials/csrf.jade
+            - var disableMe = loggedIn.id === user.id ? true : false;
+            input(type='hidden', value=user.id, name='userId')
+            input.list-input(type='submit', value='Delete', disabled=disableMe)

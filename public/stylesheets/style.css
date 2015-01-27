@@ -26,6 +26,7 @@ fieldset {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
+  padding-top: 4em;
 }
 
 input, button {
@@ -35,6 +36,7 @@ input, button {
   padding: 10px;
   width: 100%;
   transition: .5s ease;
+  height: 4.5em;
 }
 
 input:hover, button:hover {
@@ -49,6 +51,10 @@ input[type='submit'] {
 
 input[type='submit']:hover {
   background-color: #235CB8;
+}
+
+input[type='submit']:disabled {
+  background-color: #888;
 }
 
 fieldset input,
@@ -90,7 +96,7 @@ fieldset input[type='radio']:checked + label {
 
 fieldset input[type='checkbox'] + label > i::before,
 fieldset input[type='radio'] + label > i::before {
-  font-size: 1.2em;
+  font-size: 1.4em;
   padding-right: .25em;
 }
 
@@ -174,7 +180,7 @@ label span {
   position: fixed;
   width: 100%;
   height: 2em;
-  top: -4em;
+  top: -10em;
   left: 0;
   z-index: 20;
   -webkit-animation: slideup 5s;
@@ -193,22 +199,6 @@ label span {
   padding: 1em;
 }
 
-.halfpint > label {
-  width: 50%;
-  display: inline-block;
-  text-align: center;
-  font-size: 1.2em;
-  border-width: 2px;
-}
-
-.halfpint > label:first-child {
-  border-width-right: 1px !important;
-}
-
-.halfpint > label:last-child {
-  border-width-left: 1px !important;
-}
-
 .add > i {
   padding-right: .25em;
 }
@@ -220,13 +210,14 @@ label span {
 .answer {
   width: 100%;
   position: relative;
+  float: right;
   height: 100%;
 }
 
 .answer > .drag-handle {
   width: 1.2em;
   font-size: 1.5em;
-  line-height: 2em;
+  line-height: 3em;
   position: absolute;
   top: 0;
   left: -1.2em;
@@ -234,19 +225,13 @@ label span {
 }
 
 .answer > input {
-  width: 92%;
+  width: 88%;
 }
 
 .answer > .delete-answer {
-  width: 8%;
+  width: 12%;
   border-left-width: 0;
   border-radius: 0 5px 5px 0;
-  /*top: 1px;
-  font-size: 1.2em;
-  line-height: 1em;
-  border-top-width: 1px;
-  border-bottom-width: 1px;
-  height: 43px;*/
 }
 
 .answer:first-child > input,
@@ -262,6 +247,182 @@ label span {
 .errorText {
   color: #C9262C;
   display: none;
+}
+
+.message {
+  font-size: 1.2em;
+}
+
+a.button {
+  width: 100%;
+  display: inline-block;
+  margin: 5px;
+  text-decoration: none;
+  padding: 16px 20px;
+  background-color: #2665C9;
+  color: #FFF;
+  border-radius: 5px;
+  text-align: center;
+  transition: .5s ease;
+}
+
+a.button:hover {
+  background-color: #235CB8;
+}
+
+.halfpint > label {
+  width: 50% !important;
+  display: inline-block !important;
+  text-align: center !important;
+  font-size: 1.2em !important;
+  border-width: 2px;
+}
+
+table.surveys {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.surveys td {
+  padding: 5px 10px
+}
+
+table.surveys th {
+  background-color: #333;
+  color: #FEFEFE;
+  font-weight: bold;
+}
+
+table.surveys td,
+table.surveys th {
+  padding: 6px;
+  border: 1px solid: #CCC;
+  text-align: left;
+}
+
+table.surveys tr:nth-of-type(odd) {
+  background-color: #DDD;
+}
+
+.halfpint > label:first-child {
+  border-width-right: 1px !important;
+}
+
+.halfpint > label:last-child {
+  border-width-left: 1px !important;
+}
+
+.list-input {
+  width: 100%;
+  display: inline-block;
+  margin: 5px;
+  text-decoration: none;
+  padding: 16px 20px;
+  background-color: #2665C9;
+  color: #FFF;
+  border-radius: 5px;
+  text-align: center;
+  border: 0px solid transparent;
+  height: 3.75em;
+}
+
+.menuContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #235CB8;
+  color: #FEFEFE;
+  display: table;
+  height: 4em;
+}
+
+.menuInner {
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+ul.nav {
+  margin: 0;
+  padding: 0;
+  top: 0;
+  list-style-type: none;
+}
+
+ul.nav li {
+  height: 100%;
+  display: block;
+  position: relative;
+  float: left;
+  text-align: center;
+}
+
+ul.nav li a {
+  display: block;
+  font-size: 1.2em;
+  line-height: 1.5em;
+  padding: 1em;
+  color: #FFF;
+  text-decoration: none;
+}
+
+ul.nav li a:hover {
+  background-color: #2665C9;
+}
+
+@media screen and (max-width: 830px) {
+  .answer {
+    width: 96%;
+  }
+
+  table.responsive,
+  table.responsive thead,
+  table.responsive tbody,
+  table.responsive th,
+  table.responsive td,
+  table.responsive tr {
+    display: block;
+  }
+
+  table.responsive thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  table.responsive tr {
+    border: 2px solid #CCC;
+  }
+
+  table.responsive td {
+    border: none;
+    border-bottom: 1px solid #CCC;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  table.responsive td:before {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+
+  table.surveys td:nth-of-type(1):before {
+    content: "ID";
+  }
+  table.surveys td:nth-of-type(2):before {
+    content: "Question";
+  }
+  table.surveys td:nth-of-type(3):before {
+    content: "Results";
+  }
+  table.surveys td:nth-of-type(4):before {
+    content: "Edit";
+  }
 }
 
 @keyframes slideup{

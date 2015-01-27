@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1 Editing User #{user.id}
+  form(action='/admin/edit/user', method='POST')
+    include ./partials/csrf.jade
+    input(type='hidden', name='id', value=user.id)
+    input(type='text', name='username', value=user.username, placeholder='Username')
+    input(type='password', name='password', placeholder='Password (leave blank to keep current)')
+    input(type='submit', value='Edit User')

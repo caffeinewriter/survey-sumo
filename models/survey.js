@@ -3,7 +3,7 @@ var crypto = require('crypto');
 module.exports = function(sequelize, DataTypes) {
   var Survey = sequelize.define("Survey", {
     question: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1024),
       allowNull: false
     },
     type: {
@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
       values: ['multiple', 'single']
     },
     answers: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(8192),
       allowNull: false
     },
     results: {

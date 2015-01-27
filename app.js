@@ -90,8 +90,6 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-// error handlers
-
 // csrf error handling
 
 app.use(function(err, req, res, next) {
@@ -107,7 +105,9 @@ if (app.get('env') === 'development') {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
-            error: err
+            error: err,
+            err: req.flash('error'),
+            info: req.flash('info')
         });
     });
 }
@@ -118,9 +118,10 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
-        error: {}
+        error: {},
+        err:  req.flash('error'),
+        info: req.flash('info')
     });
 });
-
 
 module.exports = app;

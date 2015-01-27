@@ -3,12 +3,10 @@ extends layout
 block content
   img.sumohead(src='/images/sumohead.png')
   h1.center-text Adminstration Dashboard
+  p Logged in as #{loggedIn}
   fieldset
-    form(action='/admin/new/survey', method='GET')
-      input(type='submit', value='New Survey')
-    form(action='/admin/edit/surveys', method='GET')
-      input(type='submit', value='Edit Surveys')
-    form(action='/admin/new/user', method='GET')
-      input(type='submit', value='New User')
-    form(action='/admin/edit/users', method='GET')
-      input(type='submit', value='Edit Users')
+    a.button(href='/admin/new/survey') New Survey
+    a.button(href='/admin/list/survey') List Surveys
+    a.button(href='/admin/new/user') New User
+    a.button(href='/admin/list/user') List Users
+    a.button(href='/admin/logout') Logout
