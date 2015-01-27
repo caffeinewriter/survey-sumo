@@ -117,3 +117,7 @@ A list of all current users registered on the application. It also has links to 
 ###`/admin/edit/user/:userId`
 
 Allows users to edit the username and password for the user with id `userId`.
+
+##Footnotes
+
+Sumo image is property of AppSumo. Created by Brandon Anzaldi with love. 
