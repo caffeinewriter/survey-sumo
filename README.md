@@ -3,6 +3,8 @@ Sumo Survey
 
 A feature-rich, secure survey application built with Sequelize.js, Express, MySQL, and (optionally) MongoDB.
 
+A live demo is available on [Heroku](https://tranquil-tor-2960.herokuapp.com/).
+
 ##Features
 
 * Allows for single-choice or multiple-choice questions.
