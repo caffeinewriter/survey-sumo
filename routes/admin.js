@@ -68,20 +68,24 @@ var isAuthenticated = function(req, res, next) {
 }
 
 router.get('/', function(req, res) {
-  if(req.isAuthenticated()) {
-    res.render('dashboard', {
-      title: 'Administration Dashboard | Survey Sumo',
-      info: req.flash('info'),
-      err:  req.flash('error'),
-      loggedIn: req.user
-    });
-  } else {
-    res.render('login', {
-      title: 'Login | Survey Sumo',
-      info: req.flash('info'),
-      err:  req.flash('error')
-    });
-  }
+  models.User.findAndCount({}).then(function(users) {
+    if (users.count < 1) {
+      return res.redirect('/admin/setup');
+    } else if(req.isAuthenticated()) {
+      res.render('dashboard', {
+        title: 'Administration Dashboard | Survey Sumo',
+        info: req.flash('info'),
+        err:  req.flash('error'),
+        loggedIn: req.user
+      });
+    } else {
+      res.render('login', {
+        title: 'Login | Survey Sumo',
+        info: req.flash('info'),
+        err:  req.flash('error')
+      });
+    }
+  });
 });
 
 router.get('/setup', function(req, res) {

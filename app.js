@@ -47,6 +47,7 @@ if (config.mongo.enabled) {
     }
     mongoose.connect(MONGO_URL, mdbOptions);
   };
+  connectDb();
   var MongoStore = require('connect-mongo')(session);
   var mongoStoreOpts = {
     mongooseConnection: mongoose.connection,

@@ -11,10 +11,6 @@ var config = {
       work: 11 // The salt work factor for bcyrpt
     }
   },
-  recaptcha: {
-    site: "RecaptchaSiteKey",
-    secret: "RecaptchaSecretKey"
-  },
   mongo: { //MongoDB information. Only required for using MongoDB as a persistent session store.
     enabled: false, // Leave this false if you don't want to use MongoDB Session Store
     host: 'localhost', //MongoDB host
