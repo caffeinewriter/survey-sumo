@@ -17,6 +17,14 @@ A live demo is available on [Heroku](https://tranquil-tor-2960.herokuapp.com/).
 * Hashes all passwords using bcrypt for security.
 * Supports all dialects [supported by Sequelize](http://sequelize.readthedocs.org/en/latest/docs/getting-started/#setting-up-a-connection) except for `sqlite`.
 
+##Prerequisites
+
+* Node.js. Tested with >=0.10.34, though will likely work with older versions as well.
+* `npm`. Tested with >=1.4.28, though will likely work with older versions as well.
+* [Microsoft Visual Studio Express](http://www.visualstudio.com/products/visual-studio-express-vs) will likely be needed to compile all dependencies on Windows.
+* A MySQL database.
+* A MongoDB store. (Optional)
+
 ##Setup
 
 1. Run `npm install` to install all necessary dependencies from `package.json`.
