@@ -1,5 +1,4 @@
 var bcrypt = require('bcrypt'); // bcrypt for password hashing
-var SALT_WORK = 10; // Salt work factor
 
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User", {
@@ -44,4 +43,4 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
   return User;
-}
+};

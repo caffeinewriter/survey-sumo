@@ -29,6 +29,6 @@ var config = {
     username: 'sqlsumo', // Database username
     password: 's3cretsum0' // Database password
   }
-}
+};
 
 module.exports = config;

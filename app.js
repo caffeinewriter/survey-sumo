@@ -9,7 +9,7 @@ var flash = require('connect-flash');
 var lusca = require('lusca'); // security time!
 var passport = require('passport');
 
-var config = require(path.join(__dirname, 'config.js'))
+var config = require(path.join(__dirname, 'config.js'));
 
 var routes = require(path.join(__dirname, 'routes/index.js')); // Load routes.
 var admin = require(path.join(__dirname, 'routes/admin.js')); // Load Administration routes.
@@ -44,7 +44,7 @@ if (config.mongo.enabled) {
           keepAlive: 1
         }
       }
-    }
+    };
     mongoose.connect(MONGO_URL, mdbOptions);
   };
   connectDb();
@@ -94,7 +94,9 @@ app.use(function(req, res, next) {
 // csrf error handling
 
 app.use(function(err, req, res, next) {
-  if (err.code !== "EBADCSRFTOKEN") return next(err);
+  if (err.code !== "EBADCSRFTOKEN") {
+    return next(err);
+  }
   res.status(403);
   res.send('Expired session or form has been tampered with.');
 });

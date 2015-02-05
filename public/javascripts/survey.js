@@ -1,5 +1,5 @@
 var ready = function (cb) {
-  if (document.readyState != 'loading') {
+  if (document.readyState !== 'loading') {
     cb();
   } else {
     document.addEventListener('DOMContentLoaded', cb);
@@ -17,10 +17,10 @@ var fadeAndRemove = function (element, cb) {
     element.style.filter = 'alpha(opacity=' + op * 100 + ")";
     op -= op * 0.3;
   }, 20);
-}
+};
 
 if (navigator.userAgent.indexOf("MSIE ") !== -1) {
-  alert('Internet Explorer may not support all features necessary to properly use this page. Please consider trying another browser.');
+  window.alert('Internet Explorer may not support all features necessary to properly use this page. Please consider trying another browser.');
 }
 
 var validateForm = function() {
@@ -44,7 +44,7 @@ var validateForm = function() {
     doRet = false;
   }
   return doRet;
-}
+};
 
 var readyPage = function() {
   NodeList.prototype.forEach = HTMLCollection.prototype.forEach = Array.prototype.forEach;
@@ -72,6 +72,6 @@ var readyPage = function() {
       fadeAndRemove(this.parentNode);
     });
   });
-}
+};
 
 ready(readyPage);

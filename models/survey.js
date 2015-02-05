@@ -1,5 +1,3 @@
-var crypto = require('crypto');
-
 module.exports = function(sequelize, DataTypes) {
   var Survey = sequelize.define("Survey", {
     question: {
@@ -26,4 +24,4 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
   return Survey;
-}
+};
