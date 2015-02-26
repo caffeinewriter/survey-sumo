@@ -1,0 +1,8 @@
+{
+  "name": "Survey Sumo",
+  "description": "A quick 'n' dirty survey app with Express and SQL.",
+  "repository": "https://github.com/caffeinewriter/survey-sumo",
+  "logo": "https://tranquil-tor-2960.herokuapp.com/images/sumohead.png",
+  "keywords": ["node", "express", "survey", "sql"],
+  "addons": ["cleardb"]
+}
